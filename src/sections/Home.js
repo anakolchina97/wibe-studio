@@ -4,7 +4,7 @@ import CoverVideo from "../components/CoverVideo";
 
 const Section = styled.section`
   position: relative;
-  min-height: 100vh;
+  min-height: 200vh;
   overflow: hidden;
 `;
 
