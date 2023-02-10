@@ -25,6 +25,7 @@ const Section = styled(motion.section)`
   justify-content: flex-start;
   align-items: flex-start;
   position: relative;
+  z-index: 10;
 `;
 
 const Title = styled.h1`
