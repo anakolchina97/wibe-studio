@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useLayoutEffect, useRef } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import gsap from "gsap";
@@ -107,6 +107,48 @@ const Shop = () => {
   const ref = useRef(null);
 
   const Horizontalref = useRef(null);
+
+  useLayoutEffect(() => {
+    const element = ref.current;
+    const scrollingElement = Horizontalref.current;
+    const pinWrapWidth = scrollingElement.offsetWidth;
+
+    const t1 = gsap.timeline();
+
+    setTimeout(() => {
+      t1.to(element, {
+        scrollTrigger: {
+          trigger: element,
+          start: "top top",
+          end: `${pinWrapWidth} bottom`,
+          scroller: ".App", //locomotive-scroll
+          scrub: 1,
+          pin: true,
+        },
+        height: `${scrollingElement.scrollWidth}px`,
+        ease: "none",
+      });
+
+      t1.to(scrollingElement, {
+        scrollTrigger: {
+          trigger: scrollingElement,
+          start: "top top",
+          end: `${pinWrapWidth} bottom`,
+          scroller: ".App", //locomotive-scroll
+          scrub: 1,
+        },
+        x: -pinWrapWidth,
+        ease: "none",
+      });
+      ScrollTrigger.refresh();
+    }, 1000);
+    ScrollTrigger.refresh();
+
+    return () => {
+      t1.kill();
+      ScrollTrigger.kill();
+    };
+  }, []);
 
   return (
     <Section ref={ref} id="shop">
