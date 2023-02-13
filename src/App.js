@@ -13,9 +13,20 @@ import ScrollTriggerProxy from "./components/ScrollTriggerProxy";
 import Banner from "./sections/Banner";
 import NewArrival from "./sections/NewArrival";
 import Footer from "./sections/Footer";
+import Loader from "./components/Loader";
+import { useEffect } from "react";
+import { useState } from "react";
 
 function App() {
   const containerRef = useRef(null);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoaded(true);
+    }, 3000);
+  }, []);
+
   return (
     <>
       <GlobalStyles />
@@ -27,6 +38,7 @@ function App() {
           watch={[]}
           containerRef={containerRef}
         >
+          {loaded ? null : <Loader />}
           <ScrollTriggerProxy />
           <AnimatePresence>
             <main className="App" data-scroll-container ref={containerRef}>
