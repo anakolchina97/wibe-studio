@@ -38,7 +38,7 @@ function App() {
           watch={[]}
           containerRef={containerRef}
         >
-          {loaded ? null : <Loader />}
+          <AnimatePresence>{loaded ? null : <Loader />}</AnimatePresence>
           <ScrollTriggerProxy />
           <AnimatePresence>
             <main className="App" data-scroll-container ref={containerRef}>

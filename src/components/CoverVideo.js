@@ -1,7 +1,6 @@
+import { motion } from "framer-motion";
 import React from "react";
 import styled from "styled-components";
-import { motion } from "framer-motion";
-
 import MainVideo from "../assets/Walking Girl.mp4";
 
 const VideoContainer = styled.section`
@@ -45,11 +44,15 @@ const Title = styled(motion.div)`
   color: ${(props) => props.theme.text};
   div {
     display: flex;
+    flex-direction: row;
   }
   p {
     font-family: "Kaushan Script";
     font-size: ${(props) => props.theme.fontBig};
     text-shadow: 1px 1px 1px ${(props) => props.theme.body};
+    @media (max-width: 30em) {
+      font-size: calc(5rem + 8vw);
+    }
   }
   span {
     font-size: ${(props) => props.theme.fontlg};
@@ -58,6 +61,10 @@ const Title = styled(motion.div)`
     text-shadow: 1px 1px 1px ${(props) => props.theme.body};
     margin: 0 auto;
     text-transform: capitalize;
+    @media (max-width: 30em) {
+      font-size: ${(props) => props.theme.fontmd};
+      margin-top: -1.5rem;
+    }
   }
 `;
 
@@ -66,7 +73,7 @@ const container = {
   show: {
     opacity: 1,
     transition: {
-      delayChildren: 2,
+      delayChildren: 5,
       staggerChildren: 0.3,
     },
   },
@@ -79,13 +86,12 @@ const item = {
 
 const CoverVideo = () => {
   return (
-    <VideoContainer>
+    <VideoContainer data-scroll>
       <DarkOverlay />
       <Title variants={container} initial="hidden" animate="show">
         <div>
           <motion.p
             variants={item}
-            data-h1
             data-scroll
             data-scroll-delay="0.13"
             data-scroll-speed="4"
@@ -118,14 +124,17 @@ const CoverVideo = () => {
           </motion.p>
         </div>
         <motion.span
+          style={{ alignSelf: "flex-end" }}
           variants={item}
+          data-scroll
           data-scroll-delay="0.04"
           data-scroll-speed="2"
         >
           inspire. create. belive
         </motion.span>
       </Title>
-      <video src={MainVideo} type="video/mp4" autoPlay muted loop></video>
+
+      <video src={MainVideo} type="video/mp4" autoPlay muted loop />
     </VideoContainer>
   );
 };
