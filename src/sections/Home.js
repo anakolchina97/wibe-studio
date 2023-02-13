@@ -1,8 +1,9 @@
-import React from "react";
+import React, { Suspense } from "react";
 import styled from "styled-components";
-import CoverVideo from "../components/CoverVideo";
-import Logo from "../components/Logo";
-import NavBar from "../components/NavBar";
+
+const CoverVideo = React.lazy(() => import("../components/CoverVideo"));
+const NavBar = React.lazy(() => import("../components/NavBar"));
+const Logo = React.lazy(() => import("../components/Logo"));
 
 const Section = styled.section`
   position: relative;
@@ -13,9 +14,11 @@ const Section = styled.section`
 const Home = () => {
   return (
     <Section id="home">
-      <CoverVideo />
-      <Logo />
-      <NavBar />
+      <Suspense fallback={<></>}>
+        <Logo />
+        <NavBar />
+        <CoverVideo />
+      </Suspense>
     </Section>
   );
 };
